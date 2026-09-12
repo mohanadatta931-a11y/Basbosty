@@ -449,7 +449,7 @@
       <div class="candle" data-i="3"><span class="flame"></span><span class="smoke"></span></div>
       <div class="cake-body"></div>
     </div>
-    <div class="wish" id="wishText">✨ LAZURDI ✨</div>
+    <div class="wish" id="wishText">✨LAZURDI✨</div>
  
     <div class="wish-photo" id="wishPhoto">
       <div class="wish-photo-frame"><div class="ph" id="wishPhotoPh"><span><img src="Gemini_Generated_Image_8zz2xu8zz2xu8zz2.jpeg" alt=""></span></div></div>
@@ -475,6 +475,8 @@
 <!-- ================= TOOLBAR ================= -->
 <!-- 🌹 لإضافة أغنية: حطي ملف الأغنية جنب الملف ده وغيري "song.mp3" باسمه -->
 <audio id="bg-audio" loop src="song.mp3"></audio>
+<!-- 🌹 أغنية المفاجأة اللي بتشتغل لما تطفي الشموع — حطي ملفها جنب الملف ده وغيري "cake-song.mp3" باسمه -->
+<audio id="cake-audio" loop src="cake-song.mp3"></audio>
 <div class="toolbar">
   <button class="tool-btn" id="music-btn" aria-label="تشغيل الأغنية">
     <svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
@@ -649,7 +651,11 @@
   }
   distributePhotos();
   let _scatterResizeT;
+  let _lastWidth = window.innerWidth;
   window.addEventListener('resize', () => {
+    const newWidth = window.innerWidth;
+    if(newWidth === _lastWidth) return; // height-only change (mobile address bar) — ignore
+    _lastWidth = newWidth;
     clearTimeout(_scatterResizeT);
     _scatterResizeT = setTimeout(distributePhotos, 350);
   });
@@ -777,10 +783,20 @@
         document.getElementById('wishText').classList.add('show');
         document.getElementById('wishPhoto').classList.add('show');
         burstHearts(document.getElementById('cake'));
+        playCakeSong();
       }
     });
   });
  
+  const cakeAudio = document.getElementById('cake-audio');
+  function playCakeSong(){
+    audio.pause();
+    playing = false;
+    musicBtn.setAttribute('aria-label','تشغيل الأغنية');
+    cakeAudio.currentTime = 0;
+    cakeAudio.play().catch(()=>{});
+  }
+
   function burstHearts(fromEl){
     const rect = fromEl.getBoundingClientRect();
     const originX = rect.left + rect.width/2;
