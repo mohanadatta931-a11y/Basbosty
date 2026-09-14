@@ -20,12 +20,12 @@
     --color-text-soft: #7A5761;
     --shadow-soft: 0 20px 50px -25px rgba(126,42,62,0.4);
   }
- 
+
   *{ margin:0; padding:0; box-sizing:border-box; }
   html{ scroll-behavior:smooth; }
-  html{ width:100%; }
+  html{ width:100%; overflow-x:hidden; }
   body{ overflow-x:hidden; width:100%; -webkit-overflow-scrolling:touch; }
- 
+
   body{
     background:
       radial-gradient(circle at 15% 10%, var(--color-bg-deep), transparent 45%),
@@ -37,13 +37,13 @@
     transition: background .6s ease, color .6s ease;
   }
   body.locked{ overflow:hidden; height:100vh; }
- 
+
   h1,h2,h3, .display{ font-family:'Aref Ruqaa', serif; font-weight:700; color:var(--color-rose-deep); }
   h2{ font-size:clamp(1.5rem, 4vw, 2.1rem); }
- 
+
   button{ font-family:inherit; }
   button:focus-visible, .frame:focus-visible{ outline:3px solid var(--color-gold); outline-offset:3px; }
- 
+
   .grad-text{
     background:linear-gradient(90deg, var(--color-rose-deep), var(--color-gold), var(--color-rose-mid));
     background-size:200% auto;
@@ -51,18 +51,18 @@
     animation: gradShift 4s linear infinite;
   }
   @keyframes gradShift{ to{ background-position:200% center; } }
- 
+
   .progress-bar{
     position:fixed; top:0; right:0; height:3px; width:0%; z-index:60;
     background:linear-gradient(90deg, var(--color-gold), var(--color-rose-deep));
     transition:width .1s linear;
   }
- 
+
   /* ---------- falling petals ---------- */
   .petals{ position:fixed; inset:0; pointer-events:none; z-index:5; overflow:hidden; }
   .petal{ position:absolute; top:-5%; width:14px; height:18px; background:var(--color-rose-mid); opacity:.55; border-radius: 0 100% 0 100%; animation: fall linear infinite; }
   @keyframes fall{ 0%{ transform: translateY(0) translateX(0) rotate(0deg); opacity:.6;} 100%{ transform: translateY(110vh) translateX(40px) rotate(340deg); opacity:0;} }
- 
+
   /* ---------- ambient rising sparkles/hearts ---------- */
   .ambient{ position:fixed; inset:0; pointer-events:none; z-index:4; overflow:hidden; }
   .amb-item{ position:absolute; bottom:-8%; font-size:1rem; opacity:0; animation: rise linear infinite; }
@@ -73,21 +73,21 @@
     88%{ opacity:.7; }
     100%{ transform: translateY(-100vh) translateX(-15px) scale(.6); opacity:0; }
   }
- 
+
   /* ---------- site shell ---------- */
   #site{ position:relative; opacity:0; pointer-events:none; }
   #site.revealed{ opacity:1; pointer-events:auto; transition:opacity 1s ease; }
- 
+
   section{ position:relative; z-index:2; padding: 100px 8vw; max-width:980px; margin:0 auto; }
   .reveal{ opacity:0; transform:translateY(28px); transition: opacity .9s ease, transform .9s ease; }
   .reveal.in-view{ opacity:1; transform:translateY(0); }
   .eyebrow{ display:inline-block; letter-spacing:.15em; font-size:.8rem; color:var(--color-gold); font-weight:700; margin-bottom:14px; }
   .divider{ display:flex; justify-content:center; margin: 8px 0 50px; opacity:.8;}
   .divider svg{ width:150px; height:24px; }
- 
+
   /* ---------- MEMORY STRIPS (scattered photo cards, in the gaps between sections) ---------- */
-  .memory-strip{ position:relative; z-index:2; width:100%; padding:0 3vw; }
- 
+  .memory-strip{ position:relative; z-index:2; width:100%; padding:0 3vw; overflow:hidden; }
+
   .scatter-card{
     position:absolute;
     width: clamp(120px, 22vw, 185px);
@@ -102,13 +102,13 @@
   .scatter-card .ph{ aspect-ratio:1/1; border-radius:3px; overflow:hidden; background:linear-gradient(150deg, var(--color-rose-pale), var(--color-bg-deep)); display:flex; align-items:center; justify-content:center; font-size:1.6rem; }
   .scatter-card .ph img{ width:100%; height:100%; object-fit:contain; }
   .scatter-card .cap{ font-size:.64rem; text-align:center; color:var(--color-text-soft); margin-top:8px; letter-spacing:.06em; text-transform:uppercase; }
- 
+
   /* ---------- LOCK SCREEN ---------- */
   .screen{ position:fixed; inset:0; z-index:50; display:flex; align-items:center; justify-content:center; padding:24px; transition: opacity .7s ease, visibility .7s ease; }
   .screen.is-hidden{ opacity:0; visibility:hidden; pointer-events:none; }
   .screen-lock{ background: radial-gradient(circle at 20% 15%, rgba(255,255,255,.06), transparent 40%), linear-gradient(160deg, #4A1826, #7E2A3E 60%, #9C3A50); overflow-y:auto; }
-  .lock-card{ position:relative; display:flex; gap:36px; align-items:center; flex-wrap:wrap; justify-content:center; max-width:720px; width:100%; }
- 
+  .lock-card{ position:relative; display:flex; gap:36px; align-items:center; flex-wrap:wrap; justify-content:center; max-width:720px; width:100%; margin:auto; }
+
   .corner-rose{ position:fixed; width:clamp(70px,12vw,120px); height:clamp(70px,12vw,120px); opacity:.5; pointer-events:none; z-index:1; }
   .corner-rose path{ fill:none; stroke:rgba(255,255,255,.55); stroke-width:2; stroke-linecap:round; stroke-linejoin:round; }
   .corner-rose .cr-fill{ fill:rgba(255,255,255,.12); stroke:none; }
@@ -138,7 +138,7 @@
   .key.ghost{ background:transparent; border:none; color:rgba(255,255,255,.6); font-size:.82rem; }
   .lock-hint{ margin-top:14px; font-size:.76rem; color:rgba(255,255,255,.7); }
   .kb-hint{ margin-top:6px; font-size:.72rem; color:rgba(255,255,255,.5); }
- 
+
   /* ---------- LOADING SCREEN ---------- */
   .screen-loading{ background:var(--color-bg); }
   .loading-inner{ text-align:center; max-width:340px; }
@@ -147,11 +147,11 @@
   .loading-msg{ font-family:'Aref Ruqaa',serif; color:var(--color-rose-deep); font-size:1.15rem; margin:18px 0 20px; min-height:1.6em; }
   .progress-track{ width:100%; height:8px; border-radius:99px; background:var(--color-rose-pale); overflow:hidden; }
   .progress-fill{ height:100%; width:0%; border-radius:99px; background:linear-gradient(90deg, var(--color-gold), var(--color-rose-deep)); transition:width .25s linear; }
- 
+
   /* ---------- HERO ---------- */
   .hero{ min-height:100svh; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding-top:60px; padding-bottom:60px; }
   .hero-rose{ width:clamp(110px,28vw,170px); height:clamp(120px,30vw,186px); margin-bottom:14px; }
- 
+
   .hero-rose .petal{
     fill:var(--color-rose-pale); fill-opacity:0;
     stroke:var(--color-rose-deep); stroke-width:2; stroke-linecap:round; stroke-linejoin:round;
@@ -165,7 +165,7 @@
   .hero.play .hero-rose .stem{ animation: drawRose .8s ease forwards var(--d); }
   @keyframes drawRose{ to{ stroke-dashoffset:0; } }
   @keyframes fillRose{ to{ fill-opacity:1; } }
- 
+
   .hero h1{ font-size: clamp(2rem, 7vw, 4.2rem); line-height:1.3; opacity:0; transform:translateY(16px); }
   .hero.play h1{ animation: riseIn .9s ease forwards 1.6s; }
   .hero .to-her{ font-size:clamp(.95rem,2.4vw,1.05rem); color:var(--color-text-soft); margin-top:14px; max-width:520px; opacity:0; transform:translateY(16px); }
@@ -174,7 +174,7 @@
   .scroll-cue{ margin-top:50px; font-size:.85rem; color:var(--color-text-soft); display:flex; flex-direction:column; align-items:center; gap:8px; }
   .scroll-cue .line{ width:1px; height:36px; background:var(--color-rose-mid); animation:pulseLine 1.8s ease-in-out infinite; }
   @keyframes pulseLine{ 0%,100%{opacity:.3;} 50%{opacity:1;} }
- 
+
   /* ---------- LOVE LETTER ---------- */
   .letter-gate{ text-align:center; background:var(--color-card); border:1px dashed var(--color-rose-mid); border-radius:20px; padding:50px 24px; max-width:420px; margin:0 auto; box-shadow:var(--shadow-soft); transition: opacity .5s ease, transform .5s ease; }
   .letter-gate.gone{ opacity:0; transform:scale(.9); position:absolute; pointer-events:none; }
@@ -192,7 +192,7 @@
   .letter p{ font-size:clamp(.98rem,2.4vw,1.08rem); line-height:2.1; color:var(--color-text); }
   .letter p + p{ margin-top:18px; }
   .letter .sign{ margin-top:30px; font-family:'Aref Ruqaa',serif; font-size:1.4rem; color:var(--color-rose-deep); text-align:left; }
- 
+
   /* ---------- VIDEO SECTION ---------- */
   .video-section{ text-align:center; }
   .video-frame{
@@ -203,7 +203,7 @@
   .video-frame video{ width:100%; display:block; border-radius:16px; background:#000; max-height:70vh; }
   .video-frame .notch{ position:absolute; top:6px; left:50%; transform:translateX(-50%); width:70px; height:16px; background:#111; border-radius:0 0 12px 12px; }
   .video-caption{ margin-top:18px; color:var(--color-text-soft); font-size:.9rem; }
- 
+
   /* ---------- TIMELINE ---------- */
   .timeline{ position:relative; }
   .timeline::before{ content:""; position:absolute; top:0; bottom:0; right:29px; width:2px; background:linear-gradient(var(--color-rose-pale), var(--color-gold), var(--color-rose-pale)); }
@@ -213,7 +213,7 @@
   .t-date{ font-size:.8rem; color:var(--color-gold); font-weight:700; letter-spacing:.05em; }
   .t-title{ font-family:'Aref Ruqaa',serif; font-size:1.25rem; color:var(--color-rose-deep); margin-top:4px; }
   .t-text{ color:var(--color-text-soft); margin-top:6px; line-height:1.9; }
- 
+
   /* ---------- CAKE / CANDLES ---------- */
   .cake-section{ text-align:center; }
   .cake-hint{ color:var(--color-text-soft); margin-bottom:36px; }
@@ -232,18 +232,18 @@
   .cake-body::before{ content:""; position:absolute; top:-10px; right:0; left:0; height:20px; background:var(--color-card); border-radius:16px; box-shadow: inset 0 -4px 0 var(--color-rose-pale); }
   .wish{ margin-top:40px; font-family:'Aref Ruqaa',serif; font-size:clamp(1.05rem,3vw,1.3rem); color:var(--color-rose-deep); opacity:0; transform:translateY(14px); transition: opacity .7s ease, transform .7s ease; }
   .wish.show{ opacity:1; transform:translateY(0); }
- 
-  /* enlarged reveal photo — 1.5x the normal card size */
-  .wish-photo{ margin:34px auto 0; max-width: clamp(180px,33vw,278px); opacity:0; transform: scale(.7) translateY(10px); transition: opacity .6s ease, transform .6s cubic-bezier(.34,1.56,.64,1); }
+
+  /* enlarged reveal photo — grows bigger after blowing out the candles */
+  .wish-photo{ margin:34px auto 0; max-width: clamp(220px,50vw,380px); opacity:0; transform: scale(.7) translateY(10px); transition: opacity .6s ease, transform .6s cubic-bezier(.34,1.56,.64,1); }
   .wish-photo.show{ opacity:1; transform: scale(1) translateY(0); }
   .wish-photo-frame{ background:#fff; padding:10px 10px 26px; border-radius:8px; box-shadow:0 25px 50px -20px rgba(126,42,62,.45); }
   .wish-photo .ph{ aspect-ratio:1/1; border-radius:4px; overflow:hidden; background:linear-gradient(150deg, var(--color-rose-pale), var(--color-bg-deep)); display:flex; align-items:center; justify-content:center; font-size:2.2rem; }
   .wish-photo .ph img{ width:100%; height:100%; object-fit:contain; }
   .wish-photo-cap{ text-align:center; margin-top:10px; font-family:'Aref Ruqaa',serif; color:var(--color-rose-deep); font-size:1rem; }
- 
+
   .heart-pop{ position:fixed; font-size:1.2rem; pointer-events:none; z-index:80; animation: popFly 1.4s ease-out forwards; }
   @keyframes popFly{ 0%{ transform:translate(0,0) scale(.6) rotate(0deg); opacity:1; } 100%{ transform: var(--fly-t); opacity:0; } }
- 
+
   /* ---------- LIGHTBOX ---------- */
   .lightbox{ position:fixed; inset:0; background:rgba(30,10,16,.85); z-index:90; display:flex; align-items:center; justify-content:center; padding:30px; opacity:0; pointer-events:none; transition:opacity .3s ease; }
   .lightbox.open{ opacity:1; pointer-events:auto; }
@@ -252,13 +252,13 @@
   .lightbox-inner .placeholder{ padding:60px 30px; text-align:center; color:var(--color-rose-deep); }
   .lightbox-inner .cap{ padding:12px; text-align:center; font-size:.85rem; color:var(--color-text-soft); letter-spacing:.05em; text-transform:uppercase; }
   .lightbox-close{ position:absolute; top:22px; left:22px; background:none; border:none; color:#fff; font-size:1.6rem; cursor:pointer; }
- 
+
   /* ---------- FOOTER ---------- */
   .footer{ text-align:center; padding-bottom:150px; }
   .footer .display{ font-size:clamp(1.3rem,4vw,1.6rem); }
   .footer .small{ color:var(--color-text-soft); margin-top:10px; font-size:.9rem; }
   .heart-mark{ margin-top:26px; font-size:1.6rem; color:var(--color-rose-deep); }
- 
+
   /* ---------- TOOLBAR ---------- */
   .toolbar{ position:fixed; bottom:20px; left:20px; z-index:20; display:flex; gap:10px; align-items:center; }
   .tool-btn{ width:50px; height:50px; border-radius:50%; background:var(--color-rose-deep); color:#fff; border:none; display:flex; align-items:center; justify-content:center; box-shadow:0 10px 24px -8px rgba(126,42,62,.6); cursor:pointer; font-size:1.15rem; position:relative; }
@@ -266,9 +266,9 @@
   .theme-pop{ position:absolute; bottom:60px; left:0; background:var(--color-card); border-radius:16px; padding:12px; display:flex; gap:10px; box-shadow:var(--shadow-soft); opacity:0; transform:translateY(8px); pointer-events:none; transition:.25s; }
   .theme-pop.open{ opacity:1; transform:translateY(0); pointer-events:auto; }
   .swatch{ width:26px; height:26px; border-radius:50%; cursor:pointer; border:2px solid #fff; box-shadow:0 0 0 1px rgba(0,0,0,.1); }
- 
+
   @media (prefers-reduced-motion: reduce){ *{ animation:none !important; transition:none !important; } }
- 
+
   @media (max-width:640px){
     section{ padding:70px 6vw; }
     .memory-strip{ padding:0 4vw; }
@@ -284,11 +284,11 @@
 </style>
 </head>
 <body class="locked">
- 
+
 <div class="progress-bar" id="progressBar"></div>
 <div class="petals" id="petals"></div>
 <div class="ambient" id="ambient"></div>
- 
+
 <!-- ================= SCREEN 1: LOCK / PASSWORD ================= -->
 <div class="screen screen-lock" id="screenLock">
   <svg class="corner-rose tl" viewBox="0 0 120 120"><path class="cr-fill" d="M60,54 C50,46 49,32 60,26 C71,32 70,46 60,54 Z"/><path class="cr-fill" d="M60,54 C50,46 49,32 60,26 C71,32 70,46 60,54 Z" transform="rotate(72 60 54)"/><path class="cr-fill" d="M60,54 C50,46 49,32 60,26 C71,32 70,46 60,54 Z" transform="rotate(144 60 54)"/><path class="cr-fill" d="M60,54 C50,46 49,32 60,26 C71,32 70,46 60,54 Z" transform="rotate(216 60 54)"/><path class="cr-fill" d="M60,54 C50,46 49,32 60,26 C71,32 70,46 60,54 Z" transform="rotate(288 60 54)"/><path d="M60,70 C58,86 62,98 58,112"/></svg>
@@ -296,8 +296,8 @@
   <div class="lock-card">
     <div class="polaroid">
       <!-- 🌹 حطي صورة الغلاف جوه فولدر images جنب ملف الـ HTML -->
-      <div class="polaroid-photo"><img src="images/WhatsApp Image 2026-08-20 at 6.59.29 PM (2).jpeg" alt=""></div>
-      <div class="polaroid-caption">Happy Birthday<br><strong>يا حياتي</strong></div>
+      <div class="polaroid-photo"><img src="./image.png" alt=""></div>
+      <div class="polaroid-caption">Happy Birthday<br><strong>يا حياتي💖</strong></div>
       <div class="ribbon">🎀</div>
     </div>
     <div class="lock-right">
@@ -322,7 +322,7 @@
     </div>
   </div>
 </div>
- 
+
 <!-- ================= SCREEN 2: LOADING ================= -->
 <div class="screen screen-loading is-hidden" id="screenLoading">
   <div class="loading-inner">
@@ -331,10 +331,10 @@
     <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
   </div>
 </div>
- 
+
 <!-- ================= SITE ================= -->
 <div id="site">
- 
+
   <section class="hero" id="hero">
     <svg class="hero-rose" viewBox="0 0 200 220" xmlns="http://www.w3.org/2000/svg">
       <g class="petal-outer">
@@ -353,26 +353,26 @@
       <path class="leaf" style="--d:1.12s" d="M99,150 C114,144 129,149 130,159 C117,165 103,161 99,150 Z"/>
       <path class="leaf" style="--d:1.24s" d="M97,168 C83,164 70,170 70,180 C82,185 95,180 97,168 Z"/>
     </svg>
- 
+
     <span class="eyebrow">حبيت اعملك هديه بنفسي...</span>
     <h1>كل سنة وإنتِ حبيبتي يا <span class="grad-text">حياتي</span></h1>
     <p class="to-her">إهداء لأجمل بنوته في الدنيا — كل كلمة هنا مكتوبة بمشاعر حقيقية، وكل ثانية استنيتها لعيد ميلادك كانت تستاهل.</p>
- 
+
     <div class="scroll-cue"><span>انزلي شوية تحت</span><span class="line"></span></div>
   </section>
- 
+
   <div class="memory-strip reveal" id="strip1" data-align="right"></div>
- 
+
   <section class="letter-section reveal">
     <span class="eyebrow" style="display:block;text-align:center;">رسالة ليكِ</span>
     <div class="divider"><svg viewBox="0 0 150 24"><path d="M0 12 H55 M95 12 H150" stroke="#C39A56" stroke-width="1"/><circle cx="75" cy="12" r="6" fill="none" stroke="#C39A56" stroke-width="1.5"/></svg></div>
- 
+
     <div class="letter-gate" id="letterGate">
       <div class="wax-seal">💌</div>
       <p>فيه رسالة خاصة كتبتهالك… جاهزة تقريهاها؟</p>
       <button class="open-btn" id="openLetterBtn">اضغطي لفتح الرسالة</button>
     </div>
- 
+
     <div class="letter-wrap hidden" id="letterWrap">
       <div class="letter">
         <p>كل سنة وأنتِ أجمل وأغلى ما في حياتي. اليوم ده مش مجرد عيد ميلادك، اليوم هو بداية النعمة واليوم اللي اتولدت فيه كل حاجة حلوة خلت لحياتي معنى ❤️✨.</p>
@@ -386,9 +386,9 @@
       </div>
     </div>
   </section>
- 
+
   <div class="memory-strip reveal" id="strip2" data-align="left"></div>
- 
+
   <section class="video-section reveal">
     <span class="eyebrow">فيديو ليكِ</span>
     <h2 style="margin-bottom:30px;">لحظة صغيرة سجلتهالك 🎬</h2>
@@ -401,9 +401,9 @@
       </video>
     </div>
   </section>
- 
+
   <div class="memory-strip reveal" id="strip3" data-align="center"></div>
- 
+
   <section class="timeline-section reveal">
     <span class="eyebrow">حكايتنا</span>
     <h2 style="margin-bottom:44px;">لحظات مش هتتنسي</h2>
@@ -434,11 +434,11 @@
       </div>
     </div>
   </section>
- 
+
   <div class="memory-strip reveal" id="strip4" data-align="spread"></div>
- 
+
   <div class="memory-strip reveal" id="strip5" data-align="right"></div>
- 
+
   <section class="cake-section reveal">
     <span class="eyebrow">مفاجأة صغيرة</span>
     <h2 style="margin-bottom:10px;">اطفي الشمعات وتمني أمنية 🕯️</h2>
@@ -450,28 +450,28 @@
       <div class="cake-body"></div>
     </div>
     <div class="wish" id="wishText">✨LAZURDI✨</div>
- 
+
     <div class="wish-photo" id="wishPhoto">
       <div class="wish-photo-frame"><div class="ph" id="wishPhotoPh"><span><img src="Gemini_Generated_Image_8zz2xu8zz2xu8zz2.jpeg" alt=""></span></div></div>
       <div class="wish-photo-cap" id="wishPhotoCap"></div>
     </div>
   </section>
- 
+
   <section class="footer reveal">
     <div class="divider"><svg viewBox="0 0 150 24"><path d="M0 12 H55 M95 12 H150" stroke="#C39A56" stroke-width="1"/><circle cx="75" cy="12" r="6" fill="none" stroke="#C39A56" stroke-width="1.5"/></svg></div>
     <div class="display">كل سنة وإنتِ حبيبتي</div>
     <div class="small">من كل قلبي، في كل عيد ميلاد جاي.</div>
     <div class="heart-mark">🌹</div>
   </section>
- 
+
 </div>
- 
+
 <!-- ================= LIGHTBOX ================= -->
 <div class="lightbox" id="lightbox">
   <button class="lightbox-close" id="lightboxClose" aria-label="إغلاق">✕</button>
   <div class="lightbox-inner" id="lightboxInner"></div>
 </div>
- 
+
 <!-- ================= TOOLBAR ================= -->
 <!-- 🌹 لإضافة أغنية: حطي ملف الأغنية جنب الملف ده وغيري "song.mp3" باسمه -->
 <audio id="bg-audio" loop src="song.mp3"></audio>
@@ -491,7 +491,7 @@
     </div>
   </button>
 </div>
- 
+
 <script>
   /* ============================================================
      🌹 عدّلي القيم دي بسهولة
@@ -562,9 +562,9 @@
     // الصورة اللي هتظهر مكبّرة لما تطفي الشموع التلاتة
     wishPhoto: { src: "", caption: "  البسيه لحد ما ربنا يجمعني بيكي  💕💫" },
   };
- 
+
   document.getElementById('lockHint').textContent = CONFIG.passcodeHint;
- 
+
   /* ---------- petals ---------- */
   const petalsWrap = document.getElementById('petals');
   for(let i=0;i<16;i++){
@@ -577,7 +577,7 @@
     p.style.transform = `scale(${0.6 + Math.random()*0.8})`;
     petalsWrap.appendChild(p);
   }
- 
+
   /* ---------- ambient rising hearts/sparkles ---------- */
   const ambientWrap = document.getElementById('ambient');
   const ambEmojis = ['💗','✨','🌸','💫','🐟'];
@@ -591,13 +591,13 @@
     a.style.animationDelay = (Math.random()*9) + 's';
     ambientWrap.appendChild(a);
   }
- 
+
   /* ---------- memory strips: scatter photos randomly across the full width, without overlapping ---------- */
   function distributePhotos(){
     const stripIds = ['strip1','strip2','strip3','strip4','strip5'];
     const per = Math.ceil(CONFIG.photos.length / stripIds.length);
     const isMobile = window.innerWidth < 640;
- 
+
     stripIds.forEach((id, si) => {
       const el = document.getElementById(id);
       if(!el) return;
@@ -605,7 +605,7 @@
       const chunk = CONFIG.photos.slice(si*per, si*per + per);
       const count = chunk.length;
       if(count === 0){ el.style.minHeight = '0px'; return; }
- 
+
       const availW = el.clientWidth || window.innerWidth;
       const approxCard = isMobile ? 165 : 230; // card width + breathing room
       let cols = Math.max(isMobile ? 2 : 3, Math.min(isMobile ? 3 : 7, Math.floor(availW / approxCard)));
@@ -613,35 +613,39 @@
       const rows = Math.ceil(count / cols);
       const cellW = 100 / cols;      // % of strip width
       const cellH = isMobile ? 205 : 225; // px per row
- 
+
       el.style.minHeight = (rows * cellH + 30) + 'px';
- 
+
+      // keep every card fully inside the strip horizontally (accounts for the translateX(-50%) centering)
+      const cardPx = isMobile ? 145 : 185;
+      const marginPct = Math.min(46, ((cardPx/2) / availW) * 100 + 2);
+
       // shuffle so the same photo doesn't always land in the same cell on resize
       const order = chunk.map((p, idx) => idx);
       for(let i = order.length - 1; i > 0; i--){
         const j = Math.floor(Math.random() * (i + 1));
         [order[i], order[j]] = [order[j], order[i]];
       }
- 
+
       order.forEach((photoIdx, i) => {
         const p = chunk[photoIdx];
         const card = document.createElement('div');
         card.className = 'scatter-card';
- 
+
         const col = i % cols;
         const row = Math.floor(i / cols);
         const jitterX = (Math.random()*0.6 - 0.3) * cellW; // random offset within the cell
         const jitterY = Math.random()*60 - 25;
         let left = col*cellW + cellW*0.5 + jitterX; // center of the cell, then jitter
-        left = Math.max(4, Math.min(96, left));
+        left = Math.max(marginPct, Math.min(100 - marginPct, left));
         const top = Math.max(0, row*cellH + jitterY);
         const rot = (Math.random()*30 - 15).toFixed(1);
- 
+
         card.style.left = left + '%';
         card.style.top = top + 'px';
         card.style.setProperty('--r', rot + 'deg');
         card.style.animationDelay = (i*0.08) + 's';
- 
+
         const photoHTML = p.src ? `<img src="${p.src}" alt="ذكرى ${p.date}">` : `<span>📷</span>`;
         card.innerHTML = `<div class="ph">${photoHTML}</div><div class="cap">${p.date}</div>`;
         card.addEventListener('click', () => openLightbox(p.src, p.date));
@@ -659,7 +663,7 @@
     clearTimeout(_scatterResizeT);
     _scatterResizeT = setTimeout(distributePhotos, 350);
   });
- 
+
   /* ---------- wish photo (populated once) ---------- */
   (function initWishPhoto(){
     const ph = document.getElementById('wishPhotoPh');
@@ -667,19 +671,19 @@
     if(CONFIG.wishPhoto.src){ ph.innerHTML = `<img src="${CONFIG.wishPhoto.src}" alt="">`; }
     cap.textContent = CONFIG.wishPhoto.caption || '';
   })();
- 
+
   /* ---------- scroll progress + reveal on scroll ---------- */
   window.addEventListener('scroll', () => {
     const h = document.documentElement;
     const pct = (h.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
     document.getElementById('progressBar').style.width = (pct||0) + '%';
   });
- 
+
   const io = new IntersectionObserver((entries)=>{
     entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in-view'); } });
   }, { threshold:.12 });
   document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
- 
+
   /* ============================================================
      LOCK SCREEN LOGIC (keypad + physical keyboard)
      ============================================================ */
@@ -688,7 +692,7 @@
   const audio = document.getElementById('bg-audio');
   const musicBtn = document.getElementById('music-btn');
   let playing = false;
- 
+
   function renderDots(){
     dotsWrap.innerHTML = "";
     for(let i=0;i<CONFIG.passcode.length;i++){
@@ -698,7 +702,7 @@
     }
   }
   renderDots();
- 
+
   function handleDigit(k){
     if(entered.length >= CONFIG.passcode.length) return;
     entered += k;
@@ -707,7 +711,7 @@
   }
   function handleBack(){ entered = entered.slice(0,-1); renderDots(); }
   function handleClear(){ entered = ""; renderDots(); }
- 
+
   function checkCode(){
     if(entered === CONFIG.passcode){
       dotsWrap.classList.add('success');
@@ -719,7 +723,7 @@
       setTimeout(()=>{ dotsWrap.classList.remove('shake'); entered=""; renderDots(); }, 500);
     }
   }
- 
+
   document.getElementById('keypad').addEventListener('click', (e)=>{
     const btn = e.target.closest('.key');
     if(!btn) return;
@@ -728,7 +732,7 @@
     if(k === 'back'){ handleBack(); return; }
     handleDigit(k);
   });
- 
+
   document.addEventListener('keydown', (e)=>{
     const lockHidden = document.getElementById('screenLock').classList.contains('is-hidden');
     if(lockHidden) return;
@@ -736,20 +740,20 @@
     else if(e.key === 'Backspace'){ e.preventDefault(); handleBack(); }
     else if(e.key === 'Escape'){ handleClear(); }
   });
- 
+
   function unlockSite(){
     document.getElementById('screenLock').classList.add('is-hidden');
     const loading = document.getElementById('screenLoading');
     loading.classList.remove('is-hidden');
- 
+
     const messages = ["جاري تجهيز مفاجأتك...", "بنلمّع الشموع 🕯️", "بنرتب الذكريات 📸", "كملنا تقريبًا..."];
     let mi = 0;
     const msgEl = document.getElementById('loadingMsg');
     const msgInterval = setInterval(()=>{ mi = (mi+1)%messages.length; msgEl.textContent = messages[mi]; }, 650);
- 
+
     const fill = document.getElementById('progressFill');
     requestAnimationFrame(()=>{ fill.style.width = '100%'; });
- 
+
     setTimeout(()=>{
       clearInterval(msgInterval);
       loading.classList.add('is-hidden');
@@ -759,7 +763,7 @@
       document.getElementById('hero').classList.add('play');
     }, 2500);
   }
- 
+
   /* ============================================================
      LOVE LETTER
      ============================================================ */
@@ -769,7 +773,7 @@
     wrap.classList.remove('hidden');
     wrap.classList.add('unfold');
   });
- 
+
   /* ============================================================
      CANDLES
      ============================================================ */
@@ -787,7 +791,7 @@
       }
     });
   });
- 
+
   const cakeAudio = document.getElementById('cake-audio');
   function playCakeSong(){
     audio.pause();
@@ -815,7 +819,7 @@
       setTimeout(()=>el.remove(), 1450);
     }
   }
- 
+
   /* ============================================================
      LIGHTBOX
      ============================================================ */
@@ -829,7 +833,7 @@
   }
   document.getElementById('lightboxClose').addEventListener('click', ()=> lightbox.classList.remove('open'));
   lightbox.addEventListener('click', (e)=>{ if(e.target === lightbox) lightbox.classList.remove('open'); });
- 
+
   /* ============================================================
      MUSIC TOGGLE + pause when the video is played
      ============================================================ */
@@ -838,7 +842,7 @@
     else{ audio.play().catch(()=>{}); musicBtn.setAttribute('aria-label','إيقاف الأغنية'); }
     playing = !playing;
   });
- 
+
   const loveVideo = document.getElementById('loveVideo');
   loveVideo.addEventListener('play', () => {
     if(playing){
@@ -852,7 +856,7 @@
       audio.play().then(()=>{ playing = true; musicBtn.setAttribute('aria-label','إيقاف الأغنية'); }).catch(()=>{});
     }
   });
- 
+
   /* ============================================================
      THEME PICKER
      ============================================================ */
@@ -885,6 +889,6 @@
     if(!themeBtn.contains(e.target)) themePop.classList.remove('open');
   });
 </script>
- 
+
 </body>
 </html>
