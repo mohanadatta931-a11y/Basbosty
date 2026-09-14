@@ -23,7 +23,7 @@
 
   *{ margin:0; padding:0; box-sizing:border-box; }
   html{ scroll-behavior:smooth; }
-  html{ width:100%; overflow-x:hidden; }
+  html{ width:100%; }
   body{ overflow-x:hidden; width:100%; -webkit-overflow-scrolling:touch; }
 
   body{
@@ -56,6 +56,7 @@
     position:fixed; top:0; right:0; height:3px; width:0%; z-index:60;
     background:linear-gradient(90deg, var(--color-gold), var(--color-rose-deep));
     transition:width .1s linear;
+    pointer-events:none;
   }
 
   /* ---------- falling petals ---------- */
